@@ -1,0 +1,9 @@
+df_dane=pd.DataFrame()
+wartosc_max=100
+wartosc_chunksize=5
+f = FloatProgress(min=0, max=wartosc_max)
+display(f)
+for chunk in psql.read_sql(sql,session,chunksize=wartosc_chunksize):
+    df_dane=df_dane.append(chunk, ignore_index=True)
+    f.value+=wartosc_max/wartosc_chunksize
+df_dane.info()
